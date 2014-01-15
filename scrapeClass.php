@@ -15,7 +15,7 @@ class webScrapper {
 		}
 	}
 
-    function getData($url, $start, $end, $opts=false, $fields='') {
+    function getData($url, $start, $end, $fields='') {
         $ch = curl_init();
         $timeout = 5;
         $userAgent = 'Chrome/31.0.1650.57 Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US) AppleWebKit/525.19 (KHTML, like Gecko) Safari/537.36';
@@ -32,8 +32,7 @@ class webScrapper {
         curl_setopt($ch, CURLOPT_AUTOREFERER, false);
         curl_setopt($ch, CURLOPT_COOKIEJAR, '/tmp/cookies.txt');
         curl_setopt($ch, CURLOPT_COOKIEFILE, '/tmp/cookies.txt');
-        if($opts == true){
-            $fields = $fields;
+        if(!empty($fields)){
             curl_setopt($ch, CURLOPT_POST, 1);
             curl_setopt($ch, CURLOPT_POSTFIELDS, $fields);
         }
