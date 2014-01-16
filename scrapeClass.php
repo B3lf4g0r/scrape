@@ -40,12 +40,12 @@ class webScrapper {
         $data = curl_exec($ch);
 
         if (curl_errno($ch)> 0){
-            echo 'There was a cURL error: ' . curl_error($ch)."<br />";
+            echo 'There was a cURL error: ' . curl_error($ch)." on url: ".$url."<br />";
         } else {
             $data = @explode($start, $data);
             $data = @explode($end, $data[1]);
 
-            return $data[0];
+            return utf8_encode($data[0]);
         }
         curl_close($ch);
     }
@@ -68,7 +68,7 @@ class webScrapper {
         $data = curl_exec($ch);
         curl_close($ch);
 
-        return $data;
+        return utf8_encode($data);
     }
 
     function getBetween($content, $start, $end){
@@ -78,5 +78,9 @@ class webScrapper {
             return $r[0];
         }
         return '';
+    }
+
+    function escapeString($string){
+        return mysql_real_escape_string($string);
     }
 }
